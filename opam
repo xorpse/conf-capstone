@@ -1,0 +1,26 @@
+opam-version: "2.0"
+maintainer: "xorpse"
+homepage: "https://www.capstone-engine.org"
+bug-reports: "https://github.com/ocaml/opam-repository/issues"
+license: "BSD"
+build: [
+  ["sh" "-exc" "cc -c $CFLAGS -I/usr/local/include test.c"] {os != "macos"}
+  [
+    "sh"
+    "-exc"
+    "cc -c $CFLAGS -I/opt/local/include -I/usr/local/include test.c"
+  ] {os = "macos"}
+]
+depexts: [
+  ["capstone"] {os-distribution = "archlinux"}
+  ["libcapstone3" "libcapstone-dev"] {os-distribution = "debian"}
+  ["libcapstone3" "libcapstone-dev"] {os-distribution = "ubuntu"}
+  ["capstone"] {os = "macos" & os-distribution = "homebrew"}
+  ["capstone"] {os = "openbsd"}
+  ["capstone"] {os = "freebsd"}
+]
+synopsis: "Virtual package relying on a capstone lib system installation"
+description:
+  "This package can only install if the capstone lib is installed on the system."
+authors: "xorpse"
+extra-files: ["test.c" "md5=8a6fd51886cd889bcc1eeca308b36f29"]
